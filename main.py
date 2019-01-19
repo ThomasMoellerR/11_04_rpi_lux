@@ -11,7 +11,7 @@ import os
 import threading
 import paho.mqtt.client as mqtt
 
-def thread1():
+def thread2():
 
     # Get I2C bus
     bus = smbus.SMBus(1)
@@ -55,7 +55,7 @@ def thread1():
 
           client.publish(args.mqtt_topic_get_lux, str(visible), qos=0, retain=False)
 
-def thread2():
+def thread1():
     global client
 
     while True:
@@ -108,4 +108,5 @@ t1= threading.Thread(target=thread1)
 t2= threading.Thread(target=thread2)
 
 t1.start()
+time.sleep(1)
 t2.start()
